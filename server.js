@@ -1,41 +1,76 @@
 'use strict';
 const express = require('express');
 const server = express();
+
 const cors = require('cors');
-require('dotenv').config();
-
-
-// const PORT=3001;
-const PORT = process.env.PORT;
 server.use(cors());
 
-const weatherdata=require('./weather.json');
-// console.log(weatherdata);
+const axios = require('axios');
 
-//http://localhost:3001/gettheservice?cityName=Amman (/gettheservice === route)
-server.get('/gettheservice',(req,res)=>{
-    let cityName=req.query.cityName
-    let city=weatherdata.find(item => {
-        console.log(item.city_name)
-        // if(item.city_name == cityName){
-            // console.log('hi',item.city_name)
-        //  return item
-        return item.city_name === cityName;
+require('dotenv').config();
+const PORT = process.env.PORT;
 
-        
 
-    });
-    console.log(city);
-    res.send(city);
+// const weatherdata = require('./weather.json');
 
+const getWeatherFun = require("./Modules/weather");
+
+const getMovieFun = require("./Modules/movie");
+
+
+// // http://localhost:3001/getMovie?city=${city}
+server.get('/getMovie', getMovieFun);
+
+
+//http://localhost:3001/getWeather?city=${city}&lat=${lat}&lon=${lon}
+server.get('/getWeather', getWeatherFun);
+
+
+
+
+server.get('*', (req, res) => {
+    res.status(404).send('page not found');
 
 })
-
-server.get('*',(req,res)=>{
-    res.status(404).send('page not found error 404');
-
-})
-server.listen(PORT,()=>{
+server.listen(PORT, () => {
+    console.log('hiiiiiii')
     console.log('Hello to chect if service work well') //=>this step to check if my server work in the right way
 });
 
+
+
+
+
+// // // //http://localhost:3001/getWeather?city=
+// server.get('/getWeather', getWeatherFun);
+
+// async function getWeatherFun(req, res) {
+//     const query = req.query.city;
+//     const lat = req.query.lat;
+//     const lon = req.query.lon;
+//    const url = `https://api.weatherbit.io/v2.0/forecast/daily?query=${query}&lat=${lat}&lon=${lon}&key=${process.env.WEATHER_API_KEY}`
+// //   const url = `https://api.weatherbit.io/v2.0/forecast/daily?query=${query}&key=${process.env.WEATHER_API_KEY}`;
+//     axios.get(url).then(result => {
+//             let weatherArr = result.data;
+//             let arr = []
+//             for (let i = 0; i < weatherArr.length; i++) {
+//                 arr.push(new Forecast(weatherArr[i].datetime, weatherArr[i].weather.description));
+
+
+//             }
+
+//             res.send('weatherArr')
+//         })
+//         .catch(err => {
+//             res.send('error hiiii');
+//         })
+
+// }
+
+
+// class Forecast {
+//     constructor(datetime, description) {
+//         this.date = datetime;
+//         this.description = description;
+//     }
+// }

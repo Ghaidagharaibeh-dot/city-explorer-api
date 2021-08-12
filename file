@@ -1,0 +1,32 @@
+
+// // http://localhost:3001/gettheservice?cityName=<city_name>&lon=<the_longitude>&lat=<the_latitude> 
+
+// server.get('/gettheservice', (req, res) => {
+//     let arr = []
+//     let cityName = req.query.cityName;
+//     const lat = req.query.lat;
+//     const lon = req.query.lon;
+//     // console.log(cityName);
+//     let cityweather = weatherdata.find(item => {
+//         if (cityName.toLocaleLowerCase() === item.city_name.toLocaleLowerCase()) {
+//             return item
+//         }
+//     });
+//     console.log('cityweather', cityweather)
+//     for (let i = 0; i < cityweather.data.length; i++) {
+//         arr.push(new Forecast(cityweather.data[i].datetime, cityweather.data[i].weather.description));
+//     }
+
+//     res.send(arr);
+// });
+
+// class Forecast {
+//     constructor(datetime, description) {
+//         this.date = datetime;
+//         this.description = description;
+//         console.log(datetime, description, " hiiii")
+//     }
+// }
+
+// module.exports = Forecast;
+// console.log (Forecast)

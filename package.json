@@ -19,6 +19,11 @@
   },
   "homepage": "https://github.com/Ghaidagharaibeh-dot/city-explorer-api#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.12",
+    "server.js": "^1.0.0"
   }
 }
